@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatterBox</title>
+</head>
+<body>
+    <h1>
+        ChatterBox
+    </h1>
+
+    <div id="chat-window">
+
+    </div>
+
+    <form id="form">
+        <input type="text" name="message" id="message">
+        <button id="send-button">Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();  // io will take URL to which it should connect in React
+        const form = document.getElementById('form');
+        const message = document.getElementById('message')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            // console.log('Form submitted', message.value)
+            socket.emit('chat message', message.value);
+            message.value = '';
+        })
+        socket.on('chat message', (msg) => {
+            let ele = document.createElement('div');
+            ele.innerHTML = msg;
+            document.getElementById('chat-window').append(ele);
+        })
+    </script>
+</body>
+</html>
