@@ -23,14 +23,8 @@ class App extends Component {
       })
     })
   }
-
-  // handleKeyPress = (e) => {
-  //   this.setState({ message: e.target.value });
-  // }
   
   handleSend = (e) => {
-    // e.preventDefault();
-    // let message = this.state.message;
     this.setState({
       chatHistory: [...this.state.chatHistory, e]
     });
