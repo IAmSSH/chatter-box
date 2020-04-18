@@ -1,3 +1,100 @@
 #chat-window {
-    border: 2px solid green;
+    display: flex;
+    align-items: center;
+    border: 2px solid #BCBCBC;
+    -webkit-border-radius: 49px;
+    -moz-border-radius: 49px;
+    border-radius: 49px;
+    height: 400px;
+    background-color: white;
+    padding: 10px;
 }
+
+#inner {
+    overflow: auto;
+    height: 350px;
+    width: 100%;
+}
+.ht {
+    width: 60%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #E1E3E1;
+    border-radius: 10px;
+    color: #393939;
+}
+
+.ht-left {
+    margin-left: 8px;
+}
+
+.ht-right {
+    margin-right: 8px;
+}
+
+.left {
+    display: flex;
+    justify-items: flex-start;
+    position: relative;
+}
+
+.right {
+    display: flex; 
+    justify-content: flex-start; 
+    flex-direction: row-reverse;
+    position: relative;
+}
+
+.tri-left {
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    border-left: 15px solid transparent;
+    border-top: 15px solid #E1E3E1
+}
+
+.tri-right {
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #E1E3E1;
+}
+
+.animate-bg {
+    animation: fadeIn 0.1s 1,
+    pulse 0.2s 1;
+}
+
+.animate-tri {
+    animation: triFadeIn 0.2s 1;
+}
+
+@keyframes pulse {
+    50% {
+      transform: scaleY(1.1)
+    }
+    100% {
+      
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+        background-color: transparent;
+        color: transparent;
+    }
+    100% {
+        background-color: #E1E3E1;
+        color: #E1E3E1;
+    }
+  }
+
+  @keyframes triFadeIn {
+    0% {
+        border-top-color: transparent; 
+    }
+    100% {
+        border-top-color: #E1E3E1;
+    }
+  }

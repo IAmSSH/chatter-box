@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 import Heading from './components/Heading';
-import ChatWindow from './components/ChatWindow';
-import MessageWindow from './components/MessageWindow';
+import ChatContainer from './components/ChatContainer';
 import { Component } from 'react';
 import io from 'socket.io-client';
+import './App.css';
 
 class App extends Component {
 
@@ -17,26 +16,39 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // left message
     this.socket.on('chat message', (message) => {
+      let messageObj = {
+        message: message,
+        direction: 'left'
+      }
       this.setState({
-        chatHistory: [...this.state.chatHistory, message]
+        chatHistory: [ ...this.state.chatHistory, messageObj ]
       })
     })
   }
   
-  handleSend = (e) => {
+  handleSend = (message) => {
+    // right message
+    let messageObj = {
+      message: message,
+      direction: 'right'
+    }
     this.setState({
-      chatHistory: [...this.state.chatHistory, e]
+      chatHistory: [...this.state.chatHistory, messageObj]
     });
-    this.socket.emit('chat message', e);
+    this.socket.emit('chat message', message);
   }  
   
   render(){ 
     return (
-      <div>
-        <Heading />
-        <ChatWindow  chatHistory={ this.state.chatHistory } />
-        <MessageWindow handleSend={ this.handleSend } socket={ this.socket } />
+      <div id="wrapper">
+        {/* <Heading /> */}
+        <ChatContainer 
+          chatHistory={ this.state.chatHistory } 
+          handleSend={ this.handleSend } 
+          socket={ this.socket } 
+        />
       </div>
     );
   }

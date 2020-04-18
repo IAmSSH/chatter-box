@@ -22,19 +22,35 @@ class MessageWindow extends Component {
     handleKeyPress = (e) => {
         this.setState({ message: e.target.value });
     }
+
+    handleSet = (e) => {
+        e.preventDefault();
+    }
     
     render() {
         return(
-            <form id="form" onSubmit={ this.handleSend }>
-              <input 
-                type="text" 
-                name="message" 
-                id="message" 
-                value={ this.state.message } 
-                onChange={ this.handleKeyPress }
-              />
-              <button>Send</button>
-            </form>
+            <div id="form">
+                <form className="inner-form" onSubmit={ this.handleSet } >
+                    <input 
+                        type="text" 
+                        name="name" 
+                        className="message-field"
+                        placeholder="Nickname"
+                    />
+                    <button className="buttons">Set</button>
+                </form>
+                <form onSubmit={ this.handleSend } id="messgae-form" className="inner-form" >
+                    <input 
+                        type="text" 
+                        name="message" 
+                        className="message-field" 
+                        value={ this.state.message } 
+                        onChange={ this.handleKeyPress }
+                        placeholder="Message"
+                    />
+                    <button className="buttons">Send</button>
+                </form>
+            </div>
         );
 
     }
